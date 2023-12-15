@@ -1,0 +1,252 @@
+Grammar:
+
+Rule 0     S' -> contents
+Rule 1     contents -> ( content content )
+Rule 2     student -> ( s_key s_key s_key )
+Rule 3     students -> students student
+Rule 4     students -> student
+Rule 5     s_key -> S_INFO ( line )
+Rule 6     lines -> line
+Rule 7     lines -> lines line
+Rule 8     line -> INT
+Rule 9     line -> STRING
+Rule 10    content -> TYPE ( lines )
+Rule 11    content -> TYPE ( students )
+
+Terminals, with rules where they appear:
+
+(                    : 1 2 5 10 11
+)                    : 1 2 5 10 11
+INT                  : 8
+STRING               : 9
+S_INFO               : 5
+TYPE                 : 10 11
+error                : 
+
+Nonterminals, with rules where they appear:
+
+content              : 1 1
+contents             : 0
+line                 : 5 6 7
+lines                : 7 10
+s_key                : 2 2 2
+student              : 3 4
+students             : 3 11
+
+
+state 0
+
+    (0) S' -> . contents
+    (1) contents -> . ( content content )
+    (               shift and go to state 2
+
+    contents                       shift and go to state 1
+
+state 1
+
+    (0) S' -> contents .
+
+
+state 2
+
+    (1) contents -> ( . content content )
+    (10) content -> . TYPE ( lines )
+    (11) content -> . TYPE ( students )
+    TYPE            shift and go to state 4
+
+    content                        shift and go to state 3
+
+state 3
+
+    (1) contents -> ( content . content )
+    (10) content -> . TYPE ( lines )
+    (11) content -> . TYPE ( students )
+    TYPE            shift and go to state 4
+
+    content                        shift and go to state 5
+
+state 4
+
+    (10) content -> TYPE . ( lines )
+    (11) content -> TYPE . ( students )
+    (               shift and go to state 6
+
+
+state 5
+
+    (1) contents -> ( content content . )
+    )               shift and go to state 7
+
+
+state 6
+
+    (10) content -> TYPE ( . lines )
+    (11) content -> TYPE ( . students )
+    (6) lines -> . line
+    (7) lines -> . lines line
+    (3) students -> . students student
+    (4) students -> . student
+    (8) line -> . INT
+    (9) line -> . STRING
+    (2) student -> . ( s_key s_key s_key )
+    INT             shift and go to state 13
+    STRING          shift and go to state 14
+    (               shift and go to state 8
+
+    lines                          shift and go to state 9
+    students                       shift and go to state 10
+    line                           shift and go to state 11
+    student                        shift and go to state 12
+
+state 7
+
+    (1) contents -> ( content content ) .
+    $end            reduce using rule 1 (contents -> ( content content ) .)
+
+
+state 8
+
+    (2) student -> ( . s_key s_key s_key )
+    (5) s_key -> . S_INFO ( line )
+    S_INFO          shift and go to state 16
+
+    s_key                          shift and go to state 15
+
+state 9
+
+    (10) content -> TYPE ( lines . )
+    (7) lines -> lines . line
+    (8) line -> . INT
+    (9) line -> . STRING
+    )               shift and go to state 17
+    INT             shift and go to state 13
+    STRING          shift and go to state 14
+
+    line                           shift and go to state 18
+
+state 10
+
+    (11) content -> TYPE ( students . )
+    (3) students -> students . student
+    (2) student -> . ( s_key s_key s_key )
+    )               shift and go to state 19
+    (               shift and go to state 8
+
+    student                        shift and go to state 20
+
+state 11
+
+    (6) lines -> line .
+    )               reduce using rule 6 (lines -> line .)
+    INT             reduce using rule 6 (lines -> line .)
+    STRING          reduce using rule 6 (lines -> line .)
+
+
+state 12
+
+    (4) students -> student .
+    )               reduce using rule 4 (students -> student .)
+    (               reduce using rule 4 (students -> student .)
+
+
+state 13
+
+    (8) line -> INT .
+    )               reduce using rule 8 (line -> INT .)
+    INT             reduce using rule 8 (line -> INT .)
+    STRING          reduce using rule 8 (line -> INT .)
+
+
+state 14
+
+    (9) line -> STRING .
+    )               reduce using rule 9 (line -> STRING .)
+    INT             reduce using rule 9 (line -> STRING .)
+    STRING          reduce using rule 9 (line -> STRING .)
+
+
+state 15
+
+    (2) student -> ( s_key . s_key s_key )
+    (5) s_key -> . S_INFO ( line )
+    S_INFO          shift and go to state 16
+
+    s_key                          shift and go to state 21
+
+state 16
+
+    (5) s_key -> S_INFO . ( line )
+    (               shift and go to state 22
+
+
+state 17
+
+    (10) content -> TYPE ( lines ) .
+    TYPE            reduce using rule 10 (content -> TYPE ( lines ) .)
+    )               reduce using rule 10 (content -> TYPE ( lines ) .)
+
+
+state 18
+
+    (7) lines -> lines line .
+    )               reduce using rule 7 (lines -> lines line .)
+    INT             reduce using rule 7 (lines -> lines line .)
+    STRING          reduce using rule 7 (lines -> lines line .)
+
+
+state 19
+
+    (11) content -> TYPE ( students ) .
+    TYPE            reduce using rule 11 (content -> TYPE ( students ) .)
+    )               reduce using rule 11 (content -> TYPE ( students ) .)
+
+
+state 20
+
+    (3) students -> students student .
+    )               reduce using rule 3 (students -> students student .)
+    (               reduce using rule 3 (students -> students student .)
+
+
+state 21
+
+    (2) student -> ( s_key s_key . s_key )
+    (5) s_key -> . S_INFO ( line )
+    S_INFO          shift and go to state 16
+
+    s_key                          shift and go to state 23
+
+state 22
+
+    (5) s_key -> S_INFO ( . line )
+    (8) line -> . INT
+    (9) line -> . STRING
+    INT             shift and go to state 13
+    STRING          shift and go to state 14
+
+    line                           shift and go to state 24
+
+state 23
+
+    (2) student -> ( s_key s_key s_key . )
+    )               shift and go to state 25
+
+
+state 24
+
+    (5) s_key -> S_INFO ( line . )
+    )               shift and go to state 26
+
+
+state 25
+
+    (2) student -> ( s_key s_key s_key ) .
+    )               reduce using rule 2 (student -> ( s_key s_key s_key ) .)
+    (               reduce using rule 2 (student -> ( s_key s_key s_key ) .)
+
+
+state 26
+
+    (5) s_key -> S_INFO ( line ) .
+    S_INFO          reduce using rule 5 (s_key -> S_INFO ( line ) .)
+    )               reduce using rule 5 (s_key -> S_INFO ( line ) .)

@@ -1,0 +1,6 @@
+(groups(» ¡Œ-04-22 » ¡Œ-06-22 » ¡Œ-02-22 » ¡Œ-23-22 » ¡Œ-01-22 » ¡Œ-08-22)
+students(
+(name(Ivanov) group(» ¡Œ-04-22) age(20))
+(name(Petrov) group(» ¡Œ-04-22) age(21))
+(name(Sidorov) group(» ¡Œ-02-22) age(19)))
+)
